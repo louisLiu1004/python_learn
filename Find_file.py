@@ -30,7 +30,7 @@ s_dir = input('请输入路径：')
 s_key = input('请输入关键词：')
 Find_file().run(s_dir,s_key)
 
-for i in  range(10000):
+while True:
     Find_file().open_files(input('想要打开哪个文件，输入序号（回车默认不打开任何文件）：'))
 
 
