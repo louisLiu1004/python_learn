@@ -31,8 +31,12 @@ s_key = input('请输入关键词：')
 Find_file().run(s_dir,s_key)
 
 while True:
-    Find_file().open_files(input('想要打开哪个文件，输入序号（回车默认不打开任何文件）：'))
-
+    if len(search_files) > 0:
+        Find_file().open_files(input('想要打开哪个文件，输入序号（回车默认不打开任何文件）：'))
+    else:
+        print('==========【没找到相关文件】=========')
+        s_key =input('请重新输入关键词：')
+        Find_file().run(s_dir,s_key)
 
 
 
