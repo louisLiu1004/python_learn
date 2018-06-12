@@ -16,11 +16,10 @@ class Find_file():
                     Find_file().run(new_full_path , key)
                 elif os.path.isfile(new_full_path):
                     if key.lower() in file_names.lower():
-                        print(len(search_files),'.',new_full_path)
+                        print('【',len(search_files),'】',' ',new_full_path,'\n')
                         search_files.append(new_full_path)
         except Exception as Error_Infor:
             print(Error_Infor)
-# Find_file().open_files(input('想要打开哪个文件，输入序号（回车默认不打开任何文件）：'))
     def open_files(self,nums):
         if len(nums) == 0:
             pass
