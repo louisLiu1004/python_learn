@@ -3,6 +3,7 @@ __author__ = '財'
 
 
 import os
+import subprocess
 global search_files
 search_files = []
 class Find_file():
@@ -24,7 +25,7 @@ class Find_file():
         if len(nums) == 0:
             pass
         else:
-            os.system(search_files[int(nums)])
+            subprocess.Popen(search_files[int(nums)],shell=True)
 
 s_dir = input('请输入路径：')
 s_key = input('请输入关键词：')
