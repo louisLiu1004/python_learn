@@ -26,7 +26,7 @@ def userinfo(user,pw):
 def Login_(func):
     def Tesing_():
         if login_status[0] is 'F':
-            user = input('用户名：')
+            user = input('用户名(区分大小写)：')
             password = input('密码：')
             if user in users_info.keys() and password == users_info[user]:
                 login_status[0] = 'T'
@@ -43,33 +43,47 @@ def Home_page():
     print('欢迎来到首页')
     print('='*20)
     keys = input('0返回首页，1跳转到书店，2跳转到商店：')
-    if keys == '0':
-        Home_page()
-    elif keys == '1':
-        Book()
-    elif keys == '2':
-        Shop()
+    while True:
+        if keys == '0':
+            Home_page()
+        elif keys == '1':
+            Book()
+        elif keys == '2':
+            Shop()
+        else:
+            print('输入有误，重新输入')
+            keys = input('0返回首页，1跳转到书店，2跳转到商店：')
 
 @Login_
 def Book ():
     print('欢迎来到书城')
     keys = input('0返回首页，1跳转到书店，2跳转到商店：')
-    if keys == '0':
-        Home_page()
-    elif keys == '1':
-        Book()
-    elif keys == '2':
-        Shop()
+    while True:
+        if keys == '0':
+            Home_page()
+        elif keys == '1':
+            Book()
+        elif keys == '2':
+            Shop()
+        else:
+            print('输入有误，重新输入')
+            keys = input('0返回首页，1跳转到书店，2跳转到商店：')
+
 @Login_
 def Shop ():
     print('欢迎来到商店')
     keys = input('0返回首页，1跳转到书店，2跳转到商店：')
-    if keys == '0':
-        Home_page()
-    elif keys == '1':
-        Book()
-    elif keys == '2':
-        Shop()
+    while True:
+        if keys == '0':
+            Home_page()
+        elif keys == '1':
+            Book()
+        elif keys == '2':
+            Shop()
+        else:
+            print('输入有误，重新输入')
+            keys = input('0返回首页，1跳转到书店，2跳转到商店：')
+
 
 
 if __name__ == '__main__':
@@ -77,12 +91,17 @@ if __name__ == '__main__':
         print('*'*40)
         print('1、注册','2、首页登录','3、书店登录','4、商店登录')
         sel_num = input('请选择：')
-        if sel_num == '1':
-            sign_up()
-        elif sel_num == '2':
-            Home_page()
-        elif sel_num == '3':
-            Book()
-        elif sel_num == '4':
-            Shop()
+        while True:
+            if sel_num == '1':
+                sign_up()
+            elif sel_num == '2':
+                Home_page()
+            elif sel_num == '3':
+                Book()
+            elif sel_num == '4':
+                Shop()
+            else:
+                print('输入有误，重新输入')
+                print('1、注册', '2、首页登录', '3、书店登录', '4、商店登录')
+                sel_num = input('请选择：')
     start()
