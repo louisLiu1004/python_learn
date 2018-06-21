@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-# coding: utf-8 
-=======
 # coding: utf-8
->>>>>>> origin/master
 __author__ = '財'
 __time__ = '2018/6/21 19:53'
 
@@ -18,11 +14,7 @@ users_info_amd = {'adm': '88888888'}
 
 
 def info_read():
-<<<<<<< HEAD
-     f2 = open(r'name_info.md','r')
-=======
      f2 = open(r'name_info.txt','r')
->>>>>>> origin/master
 
      for line in f2.readlines():
          data = json.loads(line)
@@ -33,11 +25,7 @@ def info_read():
      return users_info
 
 def info_write():
-<<<<<<< HEAD
-    f = open('name_info.md','a')
-=======
     f = open(r'name_info.txt','a')
->>>>>>> origin/master
     data = json.dumps(newusers_info)
     f.write(data + '\n')
     f.close()
@@ -107,11 +95,7 @@ def Login_(func):
 def Home_page():
     print('欢迎来到首页')
     print('='*20)
-<<<<<<< HEAD
-    keys = input('0注册，1跳转到书店，2跳转到商店 3管理员登陆：')
-=======
     keys = input('0注册，1跳转到书店，2跳转到商店 3管理员：')
->>>>>>> origin/master
     while True:
         if keys == '0':
             sign_up()
@@ -128,20 +112,12 @@ def Home_page():
 @Login_
 def Book ():
     print('欢迎来到书城')
-<<<<<<< HEAD
-    keys = input('0返回首页，1管理员登陆，2跳转到商店：')
-=======
-    keys = input('0返回首页，1跳转到书店，2跳转到商店：')
->>>>>>> origin/master
+    keys = input('0返回首页，1管理员，2跳转到商店：')
     while True:
         if keys == '0':
             Home_page()
         elif keys == '1':
-<<<<<<< HEAD
             adm()
-=======
-            Book()
->>>>>>> origin/master
         elif keys == '2':
             Shop()
         else:
@@ -151,22 +127,14 @@ def Book ():
 @Login_
 def Shop ():
     print('欢迎来到商店')
-<<<<<<< HEAD
-    keys = input('0返回首页，1跳转到书店，2管理员登陆：')
-=======
-    keys = input('0返回首页，1跳转到书店，2跳转到商店：')
->>>>>>> origin/master
+    keys = input('0返回首页，1跳转到书店，2管理员：')
     while True:
         if keys == '0':
             Home_page()
         elif keys == '1':
             Book()
         elif keys == '2':
-<<<<<<< HEAD
             adm()
-=======
-            Shop()
->>>>>>> origin/master
         else:
             print('输入有误，重新输入')
             keys = input('0返回首页，1跳转到书店，2跳转到商店：')
@@ -193,16 +161,6 @@ def adm():
 
 
 if __name__ == '__main__':
-<<<<<<< HEAD
-
-    def file():
-        f= open('name_info.md','a')
-        f.close()
-
-    file()
-
-=======
->>>>>>> origin/master
     def start():
         print('*'*40)
         print('1、注册','2、首页登录','3、书店登录','4、商店登录','5、管理员登录')
@@ -220,10 +178,6 @@ if __name__ == '__main__':
                 adm()
             else:
                 print('输入有误，重新输入')
-<<<<<<< HEAD
                 print('1、注册', '2、首页登录', '3、书店登录', '4、商店登录','5、管理员登录')
-=======
-                print('1、注册', '2、首页登录', '3、书店登录', '4、商店登录')
->>>>>>> origin/master
                 sel_num = input('请选择：')
     start()
