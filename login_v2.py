@@ -12,9 +12,9 @@ users_info = {}
 newusers_info = {}
 users_info_amd = {'adm': '88888888'}
 
-
+# 登陆信息读取
 def info_read():
-     f2 = open(r'name_info.txt','r')
+     f2 = open(r'name_info.md','r')
 
      for line in f2.readlines():
          data = json.loads(line)
@@ -23,9 +23,9 @@ def info_read():
 
      f2.close()
      return users_info
-
+# 登陆信息接入文件
 def info_write():
-    f = open(r'name_info.txt','a')
+    f = open(r'name_info.md','a')
     data = json.dumps(newusers_info)
     f.write(data + '\n')
     f.close()
@@ -161,6 +161,10 @@ def adm():
 
 
 if __name__ == '__main__':
+    def file():
+        f = open('name_info.md','a')
+        f.close()
+    file()
     def start():
         print('*'*40)
         print('1、注册','2、首页登录','3、书店登录','4、商店登录','5、管理员登录')
@@ -181,3 +185,4 @@ if __name__ == '__main__':
                 print('1、注册', '2、首页登录', '3、书店登录', '4、商店登录','5、管理员登录')
                 sel_num = input('请选择：')
     start()
+
