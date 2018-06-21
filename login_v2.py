@@ -12,9 +12,9 @@ users_info = {}
 newusers_info = {}
 users_info_amd = {'adm': '88888888'}
 
-
+# 登陆信息读取
 def info_read():
-     f2 = open(r'name_info.txt','r')
+     f2 = open(r'name_info.md','r')
 
      for line in f2.readlines():
          data = json.loads(line)
@@ -23,9 +23,9 @@ def info_read():
 
      f2.close()
      return users_info
-
+# 登陆信息接入文件
 def info_write():
-    f = open(r'name_info.txt','a')
+    f = open(r'name_info.md','a')
     data = json.dumps(newusers_info)
     f.write(data + '\n')
     f.close()
@@ -112,12 +112,12 @@ def Home_page():
 @Login_
 def Book ():
     print('欢迎来到书城')
-    keys = input('0返回首页，1跳转到书店，2跳转到商店：')
+    keys = input('0返回首页，1管理员，2跳转到商店：')
     while True:
         if keys == '0':
             Home_page()
         elif keys == '1':
-            Book()
+            adm()
         elif keys == '2':
             Shop()
         else:
@@ -127,14 +127,14 @@ def Book ():
 @Login_
 def Shop ():
     print('欢迎来到商店')
-    keys = input('0返回首页，1跳转到书店，2跳转到商店：')
+    keys = input('0返回首页，1跳转到书店，2管理员：')
     while True:
         if keys == '0':
             Home_page()
         elif keys == '1':
             Book()
         elif keys == '2':
-            Shop()
+            adm()
         else:
             print('输入有误，重新输入')
             keys = input('0返回首页，1跳转到书店，2跳转到商店：')
@@ -161,6 +161,10 @@ def adm():
 
 
 if __name__ == '__main__':
+    def file():
+        f = open('name_info.md','a')
+        f.close()
+    file()
     def start():
         print('*'*40)
         print('1、注册','2、首页登录','3、书店登录','4、商店登录','5、管理员登录')
@@ -178,6 +182,7 @@ if __name__ == '__main__':
                 adm()
             else:
                 print('输入有误，重新输入')
-                print('1、注册', '2、首页登录', '3、书店登录', '4、商店登录')
+                print('1、注册', '2、首页登录', '3、书店登录', '4、商店登录','5、管理员登录')
                 sel_num = input('请选择：')
     start()
+
