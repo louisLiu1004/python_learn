@@ -62,14 +62,15 @@ from tqdm import tqdm
 import time
 from multiprocessing import Pool
 
-def get_page_index(offset,keyword):
+def get_page_index(index,keyword):
     data ={
-        'offset': offset,
+        'offset': index,
         'format': 'json',
         'keyword': keyword,
         'autoload': 'true',
         'count': 20,
         'cur_tab': 3,
+        'from': 'gallery'
     }
     url = 'https://www.toutiao.com/search_content/?'+ urlencode(data)
     try:
@@ -87,7 +88,7 @@ def parse_page_index(get_html):
             yield item.get('article_url')
 def get_page_detail(detail_url):
     headers = {
-        'user-agent': 'Mozilla / 5.0(Windows NT 10.0; WOW64) AppleWebKit / 537.36(KHTML, likeGecko) Chrome / 53.0.2785.104Safari / 537.36Core / 1.53.4882.400QQBrowser / 9.7.13059.400'
+        'user-agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36'
     }
     try:
         response = requests.get(detail_url,headers=headers)
@@ -99,9 +100,9 @@ def get_page_detail(detail_url):
         print('\033[0;31;m请求详情页面错误:{}\033[0m'.format(detail_url))
 def parse_page_detail(get_html_detail,detail_url):
     soup = BeautifulSoup(get_html_detail,'lxml')
-    title = soup.select('title')[0].text
     images_pattern = re.compile('JSON.parse\("(.*?)"]}', re.S)
     try:
+        title = soup.select('title')[0].text
         results = re.findall('"http://.*?"',re.sub('\\\\','',re.search(images_pattern,get_html_detail).group(1)))
         results_strip =[results[i].strip('"')  for i in range(len(results))]
         url_list = []
@@ -110,7 +111,7 @@ def parse_page_detail(get_html_detail,detail_url):
                 url_list.append(url)
         # 调取下载图片函数
         for url in tqdm(url_list,desc='\033[0;34;m正在下载图集...\033[0m《\033[0;32;m{}\033[0m》'.format(title)):
-            save_image(url)
+            save_image(url,title)
         return {
             'title':title,
             'url':detail_url,
@@ -119,13 +120,13 @@ def parse_page_detail(get_html_detail,detail_url):
     except Exception:
         print('\033[0;31;m忽略错误链接：{}\033[0m'.format(detail_url))
 
-def save_image(url):
+def save_image(url,title):
     try:
         response = requests.get(url)
         if response.status_code == 200:
             content = response.content
             # 在当前目录创建文件夹
-            path = r'{}\toutiao-images'.format(os.getcwd())
+            path = r'{0}\toutiao-images\{1}'.format(os.getcwd(),title)
             if not os.path.exists(path):
                 os.makedirs(path)
             # 创建md5文件名，方便检测文件的唯一性
@@ -140,7 +141,7 @@ def save_image(url):
         print('\033[0;31;m请求下载页面错误:{}\033[0m'.format(url))
 
 def main(index):
-    get_html = get_page_index(index,'街拍')
+    get_html = get_page_index(index,'新闻')
     for detail_url in parse_page_index(get_html):
        get_html_detail = get_page_detail(detail_url)
        if get_html_detail:
