@@ -62,6 +62,7 @@ from tqdm import tqdm
 import time
 from multiprocessing import Pool
 
+# 请求首页信息
 def get_page_index(index,keyword):
     data ={
         'offset': index,
@@ -81,11 +82,15 @@ def get_page_index(index,keyword):
             return None
     except RequestException :
         print('\033[0;31;m请求网页错误:{}\033[0m'.format(url))
+
+# 解析出首页每个标题对应的链接
 def parse_page_index(get_html):
     data = json.loads(get_html)
     if data and 'data' in data.keys():
         for item in data.get('data'):
-            yield item.get('article_url')
+            yield item.get('article_url') #提取article_url制作生成器，可以迭代
+
+# 请求标题链接的内容
 def get_page_detail(detail_url):
     headers = {
         'user-agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36'
@@ -98,19 +103,24 @@ def get_page_detail(detail_url):
             return None
     except RequestException :
         print('\033[0;31;m请求详情页面错误:{}\033[0m'.format(detail_url))
+
+# 从标题链接内容中解析每张图片的超链接
 def parse_page_detail(get_html_detail,detail_url):
     soup = BeautifulSoup(get_html_detail,'lxml')
+    # 设立正则匹配规则
     images_pattern = re.compile('JSON.parse\("(.*?)"]}', re.S)
     try:
+        # 获取当前链接的标题
         title = soup.select('title')[0].text
         results = re.findall('"http://.*?"',re.sub('\\\\','',re.search(images_pattern,get_html_detail).group(1)))
-        results_strip =[results[i].strip('"')  for i in range(len(results))]
+        results_strip =[results[i].strip('"')  for i in range(len(results))] #获取到当前标题下所有图片超链接
         url_list = []
+        # 排除掉同名链接
         for url in results_strip:
             if url not in url_list:
                 url_list.append(url)
         # 调取下载图片函数
-        for url in tqdm(url_list,desc='\033[0;34;m正在下载图集...\033[0m《\033[0;32;m{}\033[0m》'.format(title)):
+        for url in tqdm(url_list,desc='\033[0;34;m正在下载图集...\033[0m《\033[0;32;m{}\033[0m》'.format(title)): #用tqdm模块做进度条
             save_image(url,title)
         return {
             'title':title,
@@ -120,11 +130,12 @@ def parse_page_detail(get_html_detail,detail_url):
     except Exception:
         print('\033[0;31;m忽略错误链接：{}\033[0m'.format(detail_url))
 
+# 保存图片
 def save_image(url,title):
     try:
         response = requests.get(url)
         if response.status_code == 200:
-            content = response.content
+            content = response.content #.content为了获取到图片的bytes格式文件
             # 在当前目录创建文件夹
             path = r'{0}\toutiao-images\{1}'.format(os.getcwd(),title)
             if not os.path.exists(path):
@@ -140,8 +151,9 @@ def save_image(url,title):
     except RequestException:
         print('\033[0;31;m请求下载页面错误:{}\033[0m'.format(url))
 
+# 主函数入口
 def main(index):
-    get_html = get_page_index(index,'新闻')
+    get_html = get_page_index(index,'新闻') #传递offset量和搜索关键字 给主页做链接
     for detail_url in parse_page_index(get_html):
        get_html_detail = get_page_detail(detail_url)
        if get_html_detail:
