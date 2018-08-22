@@ -27,7 +27,7 @@ def parser_html(url):
                     str = script.text.strip()
                     return str
     except requests.RequestException as e:
-        return 0
+        parser_html(url)
 
 def total_index(str):
     try:
