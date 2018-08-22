@@ -47,7 +47,7 @@ def video_ID(str):
         print(e)
 
 def main(url):
-    global ids
+    global ids, down
     str = parser_html(url)
     video_ID(str)
     nums = total_index(str)
@@ -61,13 +61,15 @@ def main(url):
 
     for id in ids:
         downUrl.append(base_url+id)
-    print('begin download')
+    print('下载开始')
     try:
         for down in downUrl:
-            action = subprocess.Popen('youtube-dl -c  '+down, shell=True, stdout=subprocess.PIPE)
+            action = subprocess.Popen('youtube-dl -c -l '+down, shell=True, stdout=subprocess.PIPE)
             print(action.stdout.read().decode('utf-8'))
     except Exception as e:
         print(e)
+        print('下载当前链接出错{0}'.format(down))
+    print('下载结束')
 
 
 if __name__ == '__main__':
