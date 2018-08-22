@@ -61,16 +61,15 @@ def main(url):
 
     for id in ids:
         downUrl.append(base_url+id)
-    print(downUrl)
-    print('开始下载')
+    print('begin download')
     try:
         for down in downUrl:
-            action = subprocess.Popen('youtube-dl '+down, shell=True, stdout=subprocess.PIPE)
+            action = subprocess.Popen('youtube-dl -c  '+down, shell=True, stdout=subprocess.PIPE)
             print(action.stdout.read().decode('utf-8'))
     except Exception as e:
         print(e)
 
 
 if __name__ == '__main__':
-    url = 'https://www.youtube.com/watch?v=DdZ9ScpYbE8&list=UUFdTiwvDjyc62DBWrlYDtlQ'
+    url = input('please input youtube list url :  ')
     main(url)
