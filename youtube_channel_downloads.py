@@ -14,6 +14,7 @@ headers = {
 totalVideo = re.compile('"ytInitialData.*?totalVideos.*?:(\d+),"ownerName"', re.S)
 videoIds = re.compile('"watchEndpoint":{"videoId":"(.*?)",', re.S)
 list_patten = re.compile('list=(.*?)$',re.S)
+
 ids = []
 downUrl = []
 def parser_html(url):
@@ -46,7 +47,9 @@ def video_ID(str):
     except Exception as e:
         print(e)
 
-def main(url):
+def main(path,url):
+    path_re = path.replace('\\','/')
+    save = path_re+'/'+'%(title)s-%(id)s.%(ext)s'
     global ids, down
     str = parser_html(url)
     video_ID(str)
@@ -64,7 +67,7 @@ def main(url):
     print('下载开始')
     try:
         for down in downUrl:
-            action = subprocess.Popen('youtube-dl -c -l '+down, shell=True, stdout=subprocess.PIPE)
+            action = subprocess.Popen('youtube-dl -c -l -o '+save+' '+down, shell=True, stdout=subprocess.PIPE)
             print(action.stdout.read().decode('utf-8'))
     except Exception as e:
         print(e)
@@ -74,4 +77,5 @@ def main(url):
 
 if __name__ == '__main__':
     url = input('please input youtube list url :  ')
-    main(url)
+    path = input('input path to save video: ')
+    main(path,url)
