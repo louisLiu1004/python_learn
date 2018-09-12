@@ -49,7 +49,7 @@ def save_image(url,iname,word):
         if response.status_code == 200:
             content = response.content #.content为了获取到图片的bytes格式文件
             # 在当前目录创建文件夹
-            path = r'{0}\baodu_images\{1}'.format(os.getcwd(),word)
+            path = r'{0}\baidu_images\{1}'.format(os.getcwd(),word)
             if not os.path.exists(path):
                 os.makedirs(path)
             # 创建md5文件名，方便检测文件的唯一性
@@ -61,7 +61,7 @@ def save_image(url,iname,word):
         else:
             return None
     except requests.RequestException as E:
-        path = r'{0}\baodu_images\{1}\Timeout.txt'.format(os.getcwd(), word)
+        path = r'{0}\baidu_images\{1}\Timeout.txt'.format(os.getcwd(), word)
         with open(path,'a') as f:
             f.write('超时页面:'+url+'\n')
             f.close()
