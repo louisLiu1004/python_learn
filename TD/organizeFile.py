@@ -34,17 +34,14 @@ class OrganizeFileUiConnect(Ui_Form, QWidget):
         # 设置整理的原始路径
         global source_path
         source_path = QFileDialog.getExistingDirectory(self)
-        self.path_edit.setText(source_path)
-        print(source_path)
+        self.path_edit.setText(source_path
 
     def set_datatime(self):
         # 获取条件的时间戳格式
         global data_time
-        data_time = time.mktime(time.strptime(self.dateEdit.text(), '%Y/%m/%d'))
-        print(data_time)
+        data_time = time.mktime(time.strptime(self.dateEdit.text(), '%Y/%m/%d')
 
-    def main(self):
-        print(data_time)
+    def main(self)
         self.begin_organize = Organizefile()
         self.begin_organize.signal.connect(self.update_process)
         self.begin_organize.action()
@@ -79,7 +76,6 @@ class Organizefile(OrganizeFileUiConnect, QtCore.QThread):
                 if not os.path.exists(new_path):
                     os.makedirs(new_path)
                 target_path = os.path.join(new_path, file_name)
-                print(target_path)
             else:
                 # 创建旧文件路径
                 old_path = os.path.join(source_path, 'old')
