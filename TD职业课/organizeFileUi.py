@@ -9,6 +9,7 @@
 
 from PySide import QtCore, QtGui
 
+
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
@@ -65,11 +66,12 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         Form.setWindowTitle(QtGui.QApplication.translate("Form", "文件整理", None, QtGui.QApplication.UnicodeUTF8))
-        self.path_edit.setToolTip(QtGui.QApplication.translate("Form", "设置需要整理的路径", None, QtGui.QApplication.UnicodeUTF8))
+        self.path_edit.setToolTip(
+            QtGui.QApplication.translate("Form", "设置需要整理的路径", None, QtGui.QApplication.UnicodeUTF8))
         self.path_label.setText(QtGui.QApplication.translate("Form", "路径：", None, QtGui.QApplication.UnicodeUTF8))
         self.set_path.setToolTip(QtGui.QApplication.translate("Form", "点击获取路径", None, QtGui.QApplication.UnicodeUTF8))
         self.set_path.setText(QtGui.QApplication.translate("Form", "...", None, QtGui.QApplication.UnicodeUTF8))
         self.time_label.setText(QtGui.QApplication.translate("Form", "时间：", None, QtGui.QApplication.UnicodeUTF8))
-        self.dateEdit.setToolTip(QtGui.QApplication.translate("Form", "设置判断文件的时间周期", None, QtGui.QApplication.UnicodeUTF8))
+        self.dateEdit.setToolTip(
+            QtGui.QApplication.translate("Form", "设置判断文件的时间周期", None, QtGui.QApplication.UnicodeUTF8))
         self.Go.setText(QtGui.QApplication.translate("Form", "开始整理", None, QtGui.QApplication.UnicodeUTF8))
-
