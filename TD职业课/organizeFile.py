@@ -12,7 +12,6 @@ from PySide.QtGui import QWidget, QApplication, QFileDialog
 source_path = ''
 data_time = None
 
-
 # 链接界面UI
 class OrganizeFileUiConnect(Ui_Form, QWidget):
     def __init__(self):
