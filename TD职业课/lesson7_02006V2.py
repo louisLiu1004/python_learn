@@ -4,7 +4,6 @@ __time__ = '2018/9/21 21:31'
 
 import turtle
 
-
 def regular_polygon(side_nums, side_length):
     if side_nums >= 3 and side_length > 0:
         for i in range(side_nums):
