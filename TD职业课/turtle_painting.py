@@ -11,7 +11,6 @@ def little_star(index):
         screen.left(216)
     screen.end_fill()
 
-
 def big_star(index):
     for i in range(5):
         screen.forward(100)
