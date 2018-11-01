@@ -41,7 +41,7 @@
     <string>ToRef</string>
    </property>
   </widget>
-  <widget class="QProgressBar" name="progressBar">
+  <widget class="QProgressBar" name="ref_Bar">
    <property name="geometry">
     <rect>
      <x>310</x>
@@ -55,31 +55,6 @@
    </property>
    <property name="value">
     <number>0</number>
-   </property>
-  </widget>
-  <widget class="QLabel" name="Tip_lab">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>120</x>
-     <y>130</y>
-     <width>231</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>9</pointsize>
-     <weight>50</weight>
-     <bold>false</bold>
-     <underline>false</underline>
-     <stylestrategy>PreferDefault</stylestrategy>
-    </font>
-   </property>
-   <property name="text">
-    <string/>
    </property>
   </widget>
   <widget class="QWidget" name="layoutWidget">
@@ -103,7 +78,11 @@
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="pathEdit"/>
+     <widget class="QLineEdit" name="pathEdit">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+     </widget>
     </item>
     <item>
      <widget class="QToolButton" name="toolButton">
@@ -140,7 +119,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="lineEdit_2"/>
+       <widget class="QLineEdit" name="namespace_edit"/>
       </item>
      </layout>
     </item>
@@ -170,8 +149,7 @@
   <zorder>layoutWidget</zorder>
   <zorder>layoutWidget</zorder>
   <zorder>refButton</zorder>
-  <zorder>progressBar</zorder>
-  <zorder>Tip_lab</zorder>
+  <zorder>ref_Bar</zorder>
  </widget>
  <resources/>
  <connections/>
