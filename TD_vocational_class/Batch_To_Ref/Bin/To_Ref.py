@@ -92,3 +92,5 @@ class MyThread(QtCore.QThread):
             self.count += 1.0
             self.signal.emit(int((self.count / index) * 100))
             iter_ -= 1
+
+        self.count = 0
